@@ -1,9 +1,7 @@
 services:
   app:
     container_name: metamcp
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/domeally/metamcp:latest
     env_file:
       - .env
     ports:
