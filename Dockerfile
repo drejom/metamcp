@@ -94,8 +94,7 @@ RUN cd apps/backend && pnpm add drizzle-kit@0.31.1
 COPY --chown=nextjs:nodejs docker-entrypoint.sh ./
 RUN chmod +x docker-entrypoint.sh
 
-#USER nextjs
-USER root
+USER nextjs
 
 # Expose frontend port (Next.js)
 EXPOSE 12008

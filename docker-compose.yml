@@ -2,6 +2,7 @@ services:
   app:
     container_name: metamcp
     image: ghcr.io/drejom/metamcp:latest
+    user: root
     privileged: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
