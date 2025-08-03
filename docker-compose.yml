@@ -2,6 +2,7 @@ services:
   app:
     container_name: metamcp
     image: ghcr.io/drejom/metamcp:latest
+    pull_policy: always
     user: root
     privileged: true
     volumes:

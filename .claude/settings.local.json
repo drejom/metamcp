@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:docs.metamcp.com)"
+      "WebFetch(domain:docs.metamcp.com)",
+      "Bash(git commit:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(git add:*)",
+      "Bash(git push:*)"
     ],
     "deny": []
   }
