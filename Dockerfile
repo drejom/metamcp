@@ -61,8 +61,15 @@ LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.title="MetaMCP"
 LABEL org.opencontainers.image.vendor="metatool-ai"
 
-# Install curl for health checks
-RUN apt-get update && apt-get install -y curl postgresql-client && apt-get clean && rm -rf /var/lib/apt/lists/*
+# Install curl for health checks and additional tools needed by MCP servers
+RUN apt-get update && apt-get install -y \
+    curl \
+    postgresql-client \
+    wget \
+    gpg \
+    && curl -fsSL https://tailscale.com/install.sh | sh \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user with proper home directory
 RUN addgroup --system --gid 1001 nodejs
@@ -94,7 +101,8 @@ RUN cd apps/backend && pnpm add drizzle-kit@0.31.1
 COPY --chown=nextjs:nodejs docker-entrypoint.sh ./
 RUN chmod +x docker-entrypoint.sh
 
-USER nextjs
+# Note: User will be overridden by docker-compose.yml to root for Docker socket access
+# USER nextjs
 
 # Expose frontend port (Next.js)
 EXPOSE 12008
