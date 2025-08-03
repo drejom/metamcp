@@ -45,8 +45,15 @@ RUN apt-get update && apt-get install -y \
     fonts-noto-color-emoji \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Set Python 3.12 as default for UV (if needed by MCP tools)
-ENV UV_PYTHON=3.12
+# Install Python 3.13 for MCP tools that require it (like hass-mcp)
+RUN apt-get update && apt-get install -y \
+    python3.13 \
+    python3.13-venv \
+    python3.13-dev \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Set Python 3.13 as default for UV (required by hass-mcp and compatible with other tools)
+ENV UV_PYTHON=3.13
 
 # Switch back to nextjs user (but docker-compose overrides this to root anyway)
 USER nextjs
