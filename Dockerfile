@@ -46,8 +46,11 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Python 3.13 for MCP tools that require it (like hass-mcp)
-RUN apt-get update && apt-get install -y software-properties-common \
-    && add-apt-repository ppa:deadsnakes/ppa \
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    gnupg \
+    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F23C5A6CF475977595C89F51BA6932366A755776 \
+    && echo "deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu jammy main" > /etc/apt/sources.list.d/deadsnakes.list \
     && apt-get update && apt-get install -y \
     python3.13 \
     python3.13-venv \
