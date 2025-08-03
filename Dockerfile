@@ -46,7 +46,9 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Python 3.13 for MCP tools that require it (like hass-mcp)
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y software-properties-common \
+    && add-apt-repository ppa:deadsnakes/ppa \
+    && apt-get update && apt-get install -y \
     python3.13 \
     python3.13-venv \
     python3.13-dev \
